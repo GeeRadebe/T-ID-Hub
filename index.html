@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T⁴ ID | Unified Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>.t4-gradient { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }</style>
+</head>
+<body class="t4-gradient text-slate-100 font-sans max-w-md mx-auto min-h-screen flex flex-col p-6">
+    <header class="text-center py-10">
+        <h1 class="text-5xl font-black tracking-tighter text-blue-500">T⁴<span class="text-white">ID</span></h1>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mt-2">Kasi Digital Passport</p>
+    </header>
+
+    <div id="login-view" class="space-y-4">
+        <div class="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 backdrop-blur-xl">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Phone Number</label>
+            <input id="phone" type="tel" placeholder="071..." class="w-full bg-slate-900 border border-slate-700 p-4 rounded-2xl mb-4 outline-none focus:border-blue-500">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Secure PIN</label>
+            <input id="pin" type="password" placeholder="••••" class="w-full bg-slate-900 border border-slate-700 p-4 rounded-2xl mb-6 outline-none focus:border-blue-500">
+            <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all">Verify Identity</button>
+        </div>
+    </div>
+
+    <div id="hub-view" class="hidden space-y-6">
+        <div class="bg-blue-600 p-6 rounded-3xl shadow-xl shadow-blue-900/20">
+            <p class="text-[10px] font-black uppercase opacity-70">Active Passport</p>
+            <h2 id="user-display" class="text-2xl font-bold mt-1">Tefo Given</h2>
+            <p class="text-xs font-mono mt-2 opacity-80">ID: T4-2026-8839-GTR</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <a href="https://geeradebe.github.io/FieldPro/" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center">
+                <div class="text-2xl mb-2">🏠</div>
+                <p class="text-[10px] font-black uppercase">FieldPro</p>
+            </a>
+            <a href="https://geeradebe.github.io/ChainTrack/" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center">
+                <div class="text-2xl mb-2">🚚</div>
+                <p class="text-[10px] font-black uppercase">ChainTrack</p>
+            </a>
+            <a href="https://geeradebe.github.io/Scholar-Link/" class="bg-slate-800 p-6 rounded-3xl border border-slate-700 text-center">
+                <div class="text-2xl mb-2">🏫</div>
+                <p class="text-[10px] font-black uppercase">Scholar-Link</p>
+            </a>
+            <a href="#" class="bg-slate-800/30 p-6 rounded-3xl border border-slate-700/50 text-center opacity-50">
+                <div class="text-2xl mb-2">🛡️</div>
+                <p class="text-[10px] font-black uppercase">EmergencyZA</p>
+            </a>
+        </div>
+        <button onclick="logout()" class="w-full text-slate-500 font-bold text-xs uppercase tracking-widest mt-4">Sign Out</button>
+    </div>
+
+    <script>
+        function login() {
+            if(document.getElementById('pin').value === '1234') {
+                localStorage.setItem('t4_auth', 'true');
+                showHub();
+            } else { alert('Invalid PIN'); }
+        }
+        function showHub() {
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('hub-view').classList.remove('hidden');
+        }
+        function logout() {
+            localStorage.removeItem('t4_auth');
+            location.reload();
+        }
+        if(localStorage.getItem('t4_auth')) showHub();
+    </script>
+</body>
+</html>
